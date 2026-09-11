@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Relatórios | Aqua Lanchas{% endblock %}
+{% block content %}
+<section class="app-section"><div class="container">
+  <div class="app-header"><h1>Relatórios</h1></div>
+  {% include 'core/partials_nav.html' %}
+  <div class="row g-4">
+    <div class="col-md-6"><div class="panel"><h2>Reservas por status</h2>{% for item in reservas_por_status %}<div class="report-row"><span>{{ item.status }}</span><strong>{{ item.total }}</strong></div>{% empty %}<p>Sem dados.</p>{% endfor %}</div></div>
+    <div class="col-md-6"><div class="panel"><h2>Reservas por origem</h2>{% for item in reservas_por_origem %}<div class="report-row"><span>{{ item.origem }}</span><strong>{{ item.total }}</strong></div>{% empty %}<p>Sem dados.</p>{% endfor %}</div></div>
+  </div>
+</div></section>
+{% endblock %}

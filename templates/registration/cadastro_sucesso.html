@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastro Realizado{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4 text-center">
+
+        <h2 class="text-success">
+            ✅ Usuário cadastrado com sucesso!
+        </h2>
+
+        <p class="mt-3">
+            Bem-vindo, <strong>{{ usuario }}</strong>
+        </p>
+
+        <a href="{% url 'home' %}" class="btn btn-primary mt-3">
+            OK
+        </a>
+
+    </div>
+</div>
+{% endblock %}

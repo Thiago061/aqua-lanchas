@@ -1,0 +1,143 @@
+﻿{% extends 'base.html' %}
+{% block title %}Aqua Lanchas | Passeios e reservas{% endblock %}
+{% block content %}
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <p class="text-uppercase fw-semibold">Experiências náuticas com segurança</p>
+      <h1>Aqua Lanchas</h1>
+      <p class="lead">Reserve embarcações, acompanhe disponibilidade e organize passeios com atendimento profissional para famílias, grupos e eventos.</p>
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-accent btn-lg" href="{% url 'reserva_criar' %}">Reservar agora</a>
+        <a class="btn btn-outline-light btn-lg" href="#frota">Conhecer frota</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quem-somos">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h2>Quem Somos</h2>
+        <p>A Aqua Lanchas oferece locação e passeios de lancha com foco em conforto, pontualidade e segurança. O sistema centraliza reservas, agenda, clientes, lembretes e acompanhamento operacional.</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="info-band">
+          <strong>Sobre a Empresa</strong>
+          <span>Atendimento por cliente, funcionário, presencial, telefone e WhatsApp, com controle de disponibilidade em tempo real.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-soft" id="frota">
+  <div class="container">
+    <div class="section-title">
+      <h2>Frota de Lanchas</h2>
+      <p>Embarcações cadastradas com capacidade, status e valor por hora.</p>
+    </div>
+    <div class="row g-3">
+      {% for lancha in lanchas %}
+        <div class="col-md-4">
+          <article class="card h-100 boat-card">
+            {% if lancha.imagem %}
+          <img
+              src="{{ lancha.imagem.url }}"
+              class="card-img-top"
+              alt="{{ lancha.nome }}">
+          {% else %}
+          <div class="boat-visual"></div>
+          {% endif %}
+            <div class="card-body">
+              <h3 class="h5">{{ lancha.nome }}</h3>
+              <p>{{ lancha.descricao|truncatewords:22 }}</p>
+              <div class="d-flex justify-content-between">
+                <span>{{ lancha.capacidade }} pessoas</span>
+                <strong>R$ {{ lancha.preco_hora }}/h</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+      {% empty %}
+        <div class="col-12"><div class="empty-state">Nenhuma lancha cadastrada ainda. Use o comando de dados iniciais ou cadastre pelo painel.</div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="servicos">
+  <div class="container">
+    <div class="section-title"><h2>Serviços</h2></div>
+    <div class="row g-3">
+      <div class="col-md-4"><div class="service-item">Reservas online com checagem de conflitos e capacidade.</div></div>
+      <div class="col-md-4"><div class="service-item">Atendimento operacional para reservas presenciais, telefone e WhatsApp.</div></div>
+      <div class="col-md-4"><div class="service-item">Calendário diário, semanal e mensal para acompanhar a agenda.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-soft" id="galeria">
+  <div class="container">
+    <div class="section-title"><h2>Galeria de Fotos</h2></div>
+    <section class="section bg-soft" id="galeria">
+  <div class="container">
+    <div class="section-title">
+      <h2>Galeria de Fotos</h2>
+    </div>
+
+```
+<div class="gallery-grid">
+
+  {% for imagem in galeria %}
+  <div class="gallery-item">
+    <img
+        src="{{ imagem.imagem.url }}"
+        alt="{{ imagem.titulo }}"
+        class="img-fluid rounded w-100">
+  </div>
+  {% empty %}
+  <div class="gallery-item">Passeios</div>
+  <div class="gallery-item">Eventos</div>
+  <div class="gallery-item">Pôr do sol</div>
+  {% endfor %}
+</div>
+  </div>
+</section>
+
+  </div>
+</section>
+
+<section class="section" id="contato">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <h2>Contato e Localização</h2>
+        <p>Fale com a equipe Aqua Lanchas para confirmar rotas, disponibilidade e condições de embarque.</p>
+        <ul class="contact-list">
+          <li>WhatsApp: <a href="https://wa.me/5561996867303" target="_blank" rel="noopener">61 996867303</a></li>
+          <li>E-mail: <a href="mailto:aqua.lanchas@gmail.com">aqua.lanchas@gmail.com</a></li>
+          <li>Localização: <a href="https://www.google.com/maps/search/?api=1&query=Bras%C3%ADlia%20-%20Bras%C3%ADlia%2C%20Bras%C3%ADlia%20-%20Distrito%20Federal" target="_blank" rel="noopener">Brasília - Brasília, Brasília - Distrito Federal</a></li>
+      </div>
+      <div class="col-lg-6" id="faq">
+        <h2>Perguntas Frequentes</h2>
+        <div class="accordion" id="faqList">
+          <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#q1">Como funciona a reserva?</button></h3><div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqList"><div class="accordion-body">Escolha a lancha, data, horário, quantidade de pessoas e envie a solicitação pelo sistema.</div></div></div>
+          <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">Posso cancelar?</button></h3><div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqList"><div class="accordion-body">Clientes podem solicitar cancelamento no painel. Funcionários e administradores podem aprovar, alterar ou cancelar reservas.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+<div class="gallery-item">
+    <img
+        src="{{ imagem.imagem.url }}"
+        alt="{{ imagem.titulo }}"
+        class="img-fluid rounded"
+    >
+</div>
+
+

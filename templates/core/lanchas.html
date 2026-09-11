@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Lanchas | Aqua Lanchas{% endblock %}
+{% block content %}
+<section class="app-section"><div class="container">
+  <div class="app-header"><h1>Embarcações</h1>{% if user.perfil.tipo == 'ADMINISTRADOR' %}<a class="btn btn-accent" href="{% url 'lancha_criar' %}">Nova lancha</a>{% endif %}</div>
+  {% include 'core/partials_nav.html' %}
+  <div class="row g-3">{% for lancha in lanchas %}
+    <div class="col-md-4"><div class="panel h-100"><h2>{{ lancha.nome }}</h2><p>{{ lancha.descricao }}</p><p><strong>Capacidade:</strong> {{ lancha.capacidade }} pessoas</p><p><strong>Valor:</strong> R$ {{ lancha.preco_hora }}/h</p><span class="badge text-bg-primary">{{ lancha.get_status_display }}</span></div></div>{% empty %}<p>Nenhuma embarcação cadastrada.</p>{% endfor %}</div>
+</div></section>
+
+{% endblock %}

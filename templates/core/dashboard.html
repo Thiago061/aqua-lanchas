@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Painel | Aqua Lanchas{% endblock %}
+{% block content %}
+<section class="app-section">
+  <div class="container">
+    <div class="app-header">
+      <div><h1>Painel Administrativo</h1><p>Bem-vindo, {{ user.get_full_name|default:user.username }}.</p></div>
+      <a class="btn btn-accent" href="{% url 'reserva_criar' %}">Nova reserva</a>
+    </div>
+    {% include 'core/partials_nav.html' %}
+    <div class="row g-3">
+      <div class="col-md-3"><div class="metric"><span>Total de reservas</span><strong>{{ total_reservas }}</strong></div></div>
+      <div class="col-md-3"><div class="metric"><span>Reservas hoje</span><strong>{{ reservas_hoje }}</strong></div></div>
+      <div class="col-md-3"><div class="metric"><span>Pendentes</span><strong>{{ reservas_pendentes }}</strong></div></div>
+      <div class="col-md-3"><div class="metric"><span>Lanchas</span><strong>{{ total_lanchas }}</strong></div></div>
+    </div>
+    <div class="row g-4 mt-1">
+      <div class="col-lg-8">
+        <div class="panel">
+          <h2>Próximas reservas</h2>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead><tr><th>Data</th><th>Horário</th><th>Lancha</th><th>Status</th><th></th></tr></thead>
+              <tbody>
+                {% for reserva in proximas_reservas %}
+                  <tr><td>{{ reserva.data|date:"d/m/Y" }}</td><td>{{ reserva.horario_inicio }} às {{ reserva.horario_fim }}</td><td>{{ reserva.lancha.nome }}</td><td><span class="badge text-bg-info">{{ reserva.get_status_display }}</span></td><td><a href="{{ reserva.get_absolute_url }}">Abrir</a></td></tr>
+                {% empty %}
+                  <tr><td colspan="5">Nenhuma reserva futura encontrada.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="panel">
+          <h2>Notificações</h2>
+          {% for notificacao in notificacoes %}
+            <p><strong>{{ notificacao.titulo }}</strong><br>{{ notificacao.mensagem }}</p>
+          {% empty %}
+            <p>Nenhuma notificação pendente.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

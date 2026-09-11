@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Agenda | Aqua Lanchas{% endblock %}
+{% block content %}
+<section class="app-section">
+  <div class="container">
+    <div class="app-header"><h1>Calendário de reservas</h1><a class="btn btn-accent" href="{% url 'reserva_criar' %}">Nova reserva</a></div>
+    {% include 'core/partials_nav.html' %}
+    {{ reservas_json|json_script:"reservas-data" }}
+    <div class="calendar-toolbar">
+      <button class="btn btn-outline-primary" data-calendar-mode="dia">Dia</button>
+      <button class="btn btn-outline-primary active" data-calendar-mode="semana">Semana</button>
+      <button class="btn btn-outline-primary" data-calendar-mode="mes">Mês</button>
+    </div>
+    <div id="calendar" class="calendar-panel"></div>
+  </div>
+</section>
+{% endblock %}

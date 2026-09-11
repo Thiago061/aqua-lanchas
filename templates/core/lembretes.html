@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Lembretes | Aqua Lanchas{% endblock %}
+{% block content %}
+<section class="app-section">
+  <div class="container">
+    <div class="app-header"><h1>Lembretes</h1><a class="btn btn-accent" href="{% url 'lembrete_criar' %}">Novo lembrete</a></div>
+    {% include 'core/partials_nav.html' %}
+    <div class="panel">
+      <table class="table align-middle"><thead><tr><th>Título</th><th>Data</th><th>Frequência</th><th>Status</th></tr></thead><tbody>
+      {% for lembrete in lembretes %}
+        <tr><td>{{ lembrete.titulo }}</td><td>{{ lembrete.data_hora|date:"d/m/Y H:i" }}</td><td>{{ lembrete.get_frequencia_display }}</td><td>{{ lembrete.ativo|yesno:"Ativo,Inativo" }}</td></tr>
+      {% empty %}
+        <tr><td colspan="4">Nenhum lembrete cadastrado.</td></tr>
+      {% endfor %}
+      </tbody></table>
+    </div>
+  </div>
+</section>
+{% endblock %}

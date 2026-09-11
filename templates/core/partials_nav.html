@@ -1,0 +1,15 @@
+<div class="tabs-row">
+  <a href="{% url 'dashboard' %}">Dashboard</a>
+  <a href="{% url 'reservas' %}">Reservas</a>
+  <a href="{% url 'calendario' %}">Agenda</a>
+  <a href="{% url 'lembretes' %}">Lembretes</a>
+  {% if user.perfil.tipo != 'CLIENTE' %}
+    <a href="{% url 'clientes' %}">Clientes</a>
+    <a href="{% url 'lanchas' %}">Lanchas</a>
+  {% endif %}
+  {% if user.perfil.tipo == 'ADMINISTRADOR' %}
+    <a href="{% url 'relatorios' %}">Relatórios</a>
+    <a href="/admin/">Admin Django</a>
+  {% endif %}
+  <a href="{% url 'perfil' %}">Perfil</a>
+</div>

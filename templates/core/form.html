@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }} | Aqua Lanchas{% endblock %}
+{% block content %}
+<section class="app-section">
+  <div class="container">
+    <div class="app-header"><h1>{{ titulo }}</h1><a class="btn btn-outline-secondary" href="javascript:history.back()">Voltar</a></div>
+    {% include 'core/partials_nav.html' %}
+    <div class="panel form-panel">
+      <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-accent" type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

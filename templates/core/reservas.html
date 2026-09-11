@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Reservas | Aqua Lanchas{% endblock %}
+{% block content %}
+<section class="app-section">
+  <div class="container">
+    <div class="app-header"><h1>Reservas</h1><a class="btn btn-accent" href="{% url 'reserva_criar' %}">Nova reserva</a></div>
+    {% include 'core/partials_nav.html' %}
+    <form class="filter-bar" method="get">
+      <input class="form-control" name="busca" placeholder="Buscar por cliente ou lancha" value="{{ request.GET.busca }}">
+      <select class="form-select" name="status"><option value="">Todos os status</option>{% for valor, rotulo in status_choices %}<option value="{{ valor }}" {% if request.GET.status == valor %}selected{% endif %}>{{ rotulo }}</option>{% endfor %}</select>
+      <button class="btn btn-outline-primary">Filtrar</button>
+    </form>
+    <div class="panel">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead><tr><th>Cliente</th><th>Lancha</th><th>Data</th><th>Horário</th><th>Origem</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            {% for reserva in reservas %}
+              <tr>
+                <td>{{ reserva.cliente.get_full_name|default:reserva.cliente.username }}</td>
+                <td>{{ reserva.lancha.nome }}</td>
+                <td>{{ reserva.data|date:"d/m/Y" }}</td>
+                <td>{{ reserva.horario_inicio }} às {{ reserva.horario_fim }}</td>
+                <td>{{ reserva.get_origem_display }}</td>
+                <td><span class="badge text-bg-secondary">{{ reserva.get_status_display }}</span></td>
+                <td><a href="{{ reserva.get_absolute_url }}">Detalhes</a></td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="7">Nenhuma reserva encontrada.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
