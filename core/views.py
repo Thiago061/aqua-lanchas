@@ -8,6 +8,7 @@ from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.generic import CreateView
 
 from .forms import ( CadastroClienteForm, LanchaForm, LembreteForm, PerfilForm, ReservaForm, FuncionarioForm )
@@ -43,6 +44,17 @@ class CadastroClienteView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
+
+        login(self.request, self.object)
+        messages.success(self.request, 'Conta criada com sucesso. Boas-vindas!')
+
+        next_url = self.request.POST.get('next') or self.request.GET.get('next')
+        if next_url and url_has_allowed_host_and_scheme(
+            url=next_url,
+            allowed_hosts={self.request.get_host()},
+            require_https=self.request.is_secure(),
+        ):
+            return redirect(next_url)
 
         return render(
             self.request,

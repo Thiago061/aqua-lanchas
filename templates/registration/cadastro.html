@@ -5,6 +5,7 @@
   <div class="auth-card wide">
     <h1>Cadastro de Cliente</h1>
     <form method="post">{% csrf_token %}
+      {% if request.GET.next %}<input type="hidden" name="next" value="{{ request.GET.next }}">{% endif %}
       {{ form.as_p }}
       <button class="btn btn-accent w-100" type="submit">Criar conta</button>
     </form>

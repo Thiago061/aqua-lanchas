@@ -9,6 +9,9 @@
       <button class="btn btn-accent w-100" type="submit">Acessar sistema</button>
     </form>
     <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
+    <hr>
+    <p class="mb-2">Não tem uma conta?</p>
+    <a class="btn btn-outline-primary w-100" href="{% url 'cadastro' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">Cadastre-se</a>
   </div>
 </section>
 {% endblock %}
