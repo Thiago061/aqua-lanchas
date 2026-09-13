@@ -45,6 +45,31 @@ class CadastroClienteForm(BootstrapFormMixin, UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.aplicar_bootstrap()
+        placeholders = {
+            'first_name': 'Seu nome',
+            'last_name': 'Seu sobrenome',
+            'email': 'voce@exemplo.com',
+            'telefone': '(00) 00000-0000',
+            'documento': '000.000.000-00',
+            'username': 'Escolha um nome de usuário',
+            'password1': 'Crie uma senha',
+            'password2': 'Digite a senha novamente',
+        }
+        autocompletes = {
+            'first_name': 'given-name',
+            'last_name': 'family-name',
+            'email': 'email',
+            'telefone': 'tel',
+            'documento': 'off',
+            'username': 'username',
+            'password1': 'new-password',
+            'password2': 'new-password',
+        }
+        for field_name, placeholder in placeholders.items():
+            self.fields[field_name].widget.attrs.update({
+                'placeholder': placeholder,
+                'autocomplete': autocompletes[field_name],
+            })
 
     def save(self, commit=True):
         user = super().save(commit=False)

@@ -201,6 +201,98 @@ footer {
   color: var(--navy);
 }
 
+.signup-section {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 120px 20px 64px;
+}
+
+.signup-card {
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(32, 33, 36, .08);
+  max-width: 760px;
+  padding: 44px 48px 34px;
+  width: 100%;
+}
+
+.signup-brand {
+  align-items: center;
+  background: var(--navy);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  font-size: 24px;
+  font-weight: 800;
+  height: 42px;
+  justify-content: center;
+  margin: 0 auto 18px;
+  width: 42px;
+}
+
+.signup-card h1 {
+  color: #202124;
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+.signup-intro {
+  color: #5f6368;
+  margin: 10px auto 30px;
+  max-width: 460px;
+  text-align: center;
+}
+
+.signup-form { display: grid; gap: 18px; }
+.signup-grid { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; }
+.signup-field { display: grid; gap: 7px; }
+.signup-field label { color: #202124; font-size: 14px; font-weight: 500; }
+.signup-field label span { color: #5f6368; font-weight: 400; }
+
+.signup-field .form-control {
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  box-shadow: none;
+  min-height: 48px;
+  padding: 11px 13px;
+}
+
+.signup-field .form-control:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 1px #1a73e8;
+}
+
+.signup-field small { color: #5f6368; font-size: 12px; }
+.signup-field .errorlist, .signup-errors { color: #b3261e; font-size: 13px; list-style: none; margin: 0; padding: 0; }
+.signup-note { color: #5f6368; font-size: 13px; line-height: 1.45; margin: 2px 0 0; }
+
+.signup-submit {
+  background: #0b57d0;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  justify-self: end;
+  padding: 11px 28px;
+}
+
+.signup-submit:hover { background: #0842a0; }
+.signup-login { color: #5f6368; font-size: 14px; margin: 28px 0 0; text-align: center; }
+.signup-login a { color: #0b57d0; font-weight: 600; text-decoration: none; }
+.signup-login a:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  .signup-section { padding: 92px 14px 36px; }
+  .signup-card { border-radius: 8px; padding: 34px 24px 28px; }
+  .signup-grid { grid-template-columns: 1fr; }
+  .signup-submit { justify-self: stretch; }
+}
+
 .app-header {
   display: flex;
   align-items: center;

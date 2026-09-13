@@ -1,14 +1,75 @@
 {% extends 'base.html' %}
-{% block title %}Cadastro | Aqua Lanchas{% endblock %}
+{% block title %}Criar conta | Aqua Lanchas{% endblock %}
 {% block content %}
-<section class="auth-section">
-  <div class="auth-card wide">
-    <h1>Cadastro de Cliente</h1>
-    <form method="post">{% csrf_token %}
+<section class="signup-section">
+  <div class="signup-card">
+    <div class="signup-brand" aria-hidden="true">A</div>
+    <h1>Crie sua conta</h1>
+    <p class="signup-intro">Faça seu cadastro para reservar sua experiência com a Aqua Lanchas.</p>
+
+    <form method="post" class="signup-form">{% csrf_token %}
       {% if request.GET.next %}<input type="hidden" name="next" value="{{ request.GET.next }}">{% endif %}
-      {{ form.as_p }}
-      <button class="btn btn-accent w-100" type="submit">Criar conta</button>
+      {% if form.non_field_errors %}
+        <div class="signup-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <div class="signup-grid">
+        <div class="signup-field">
+          <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+          {{ form.first_name }}
+          {{ form.first_name.errors }}
+        </div>
+        <div class="signup-field">
+          <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+          {{ form.last_name }}
+          {{ form.last_name.errors }}
+        </div>
+      </div>
+
+      <div class="signup-field">
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+      </div>
+
+      <div class="signup-grid">
+        <div class="signup-field">
+          <label for="{{ form.telefone.id_for_label }}">{{ form.telefone.label }} <span>Opcional</span></label>
+          {{ form.telefone }}
+          {{ form.telefone.errors }}
+        </div>
+        <div class="signup-field">
+          <label for="{{ form.documento.id_for_label }}">{{ form.documento.label }} <span>Opcional</span></label>
+          {{ form.documento }}
+          {{ form.documento.errors }}
+        </div>
+      </div>
+
+      <div class="signup-field">
+        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+        {{ form.username }}
+        {% if form.username.help_text %}<small>{{ form.username.help_text }}</small>{% endif %}
+        {{ form.username.errors }}
+      </div>
+
+      <div class="signup-grid">
+        <div class="signup-field">
+          <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+          {{ form.password1 }}
+          {{ form.password1.errors }}
+        </div>
+        <div class="signup-field">
+          <label for="{{ form.password2.id_for_label }}">Confirme sua senha</label>
+          {{ form.password2 }}
+          {{ form.password2.errors }}
+        </div>
+      </div>
+
+      <p class="signup-note">Ao criar sua conta, você poderá solicitar reservas e acompanhar os seus passeios.</p>
+      <button class="signup-submit" type="submit">Criar conta</button>
     </form>
+
+    <p class="signup-login">Já tem uma conta? <a href="{% url 'login' %}{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}">Entrar</a></p>
   </div>
 </section>
 {% endblock %}
